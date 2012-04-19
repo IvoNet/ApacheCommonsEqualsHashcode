@@ -8,11 +8,10 @@ EqualsBuilder and HashCodeBuilder classes.
 
 # Example #
 
-[code]
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
+ import org.apache.commons.lang.builder.EqualsBuilder;
+ import org.apache.commons.lang.builder.HashCodeBuilder;
 
-public class Foo {
+ public class Foo {
     private String foo;
     private String bar;
 
@@ -34,5 +33,4 @@ public class Foo {
         return new EqualsBuilder().appendSuper(super.equals(obj)).append(this.foo, other.foo)
                                   .append(this.bar, other.bar).isEquals();
     }
-}
-[code]
+ }
