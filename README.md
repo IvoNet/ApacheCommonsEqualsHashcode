@@ -1,10 +1,13 @@
 # Introduction #
 
-This little plugin is based on the equals and hasCode generator deluxe
-(https://github.com/mjedynak/EqualsHashCodeDeluxeGenerator).
+An IntelliJ Plugin for generating equals and hashCode methods based on the commons-lang
+EqualsBuilder and HashCodeBuilder Builders.
 
-This plugin generates equals and hashCode methods based on the commons-lang
-EqualsBuilder and HashCodeBuilder classes.
+This little plugin is adaptation of the equals and hasCode generator [deluxe][]
+
+[deluxe]: https://github.com/mjedynak/EqualsHashCodeDeluxeGenerator
+
+It has been tested on IntelliJ 11
 
 # Example #
 
