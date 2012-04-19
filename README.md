@@ -35,4 +35,4 @@ public class Foo {
                                   .append(this.bar, other.bar).isEquals();
     }
 }
-[/code]
+[code]
