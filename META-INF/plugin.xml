@@ -1,4 +1,4 @@
-<idea-plugin version="2">
+<idea-plugin version="2" url="https://github.com/IvoNet/ApacheCommonsEqualsHashcode">
     <name>Equals and HashCode Apache Commons Generator</name>
     <description>
         <![CDATA[
@@ -10,7 +10,7 @@
             Don't forget to put the commons-lang jar on your classpath.
             ]]>
     </description>
-    <version>1.0</version>
+    <version>1.0.1</version>
     <change-notes>
         <![CDATA[
            version 1.0
@@ -18,10 +18,15 @@
            <ul>
            <li>Tested against IDEA 11.1</li>
            </ul>
+           version 1.0.1
+           <br/>
+           <ul>
+           <li>Added url to the plugin</li>
+           </ul>
          ]]>
     </change-notes>
 
-    <vendor>IvoNet</vendor>
+    <vendor url="http://ivonet.nl" email="http://www.ivonet.nl/home/contact">IvoNet.nl</vendor>
 
     <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Build+Number+Ranges for description -->
     <idea-version since-build="107.105"/>
