@@ -1,0 +1,48 @@
+<idea-plugin version="2">
+    <name>Equals and HashCode Apache Commons Generator</name>
+    <description>
+        <![CDATA[
+            Generates equals() and hashCode() using the Apache Commons library.
+            Usage:
+            <ul>
+                <li>ALT + INSERT -> equals() and hashCode() Apache (inside Java Editor).</li>
+            </ul>
+            Don't forget to put the commons-lang jar on your classpath.
+            ]]>
+    </description>
+    <version>1.0</version>
+    <change-notes>
+        <![CDATA[
+           version 1.0
+           <br/>
+           <ul>
+           <li>Tested against IDEA 11.1</li>
+           </ul>
+         ]]>
+    </change-notes>
+
+    <vendor>IvoNet</vendor>
+
+    <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Build+Number+Ranges for description -->
+    <idea-version since-build="107.105"/>
+
+    <application-components>
+        <!-- Add your application components here -->
+    </application-components>
+
+    <project-components>
+        <!-- Add your project components here -->
+    </project-components>
+
+    <actions>
+        <action id="GenerateEqualsHashCodeDeluxe"
+                class="nl.ivonet.idea.plugins.action.GenerateEqualsHashCodeApacheCommonsAction"
+                text="equals() and hashCode() Apache Builder" description="Generate equals() and hashCode() methods">
+            <add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="JavaGenerateGroup1"/>
+        </action>
+    </actions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+</idea-plugin>
