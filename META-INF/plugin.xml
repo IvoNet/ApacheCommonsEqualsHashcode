@@ -2,8 +2,8 @@
     <name>Equals and HashCode Apache Commons Generator</name>
     <description>
         <![CDATA[
-            Generates equals() and hashCode() using the Apache Commons library.
-            Usage:
+            Generates equals() and hashCode() using the Apache Commons library.<br/>
+            Usage:<br/>
             <ul>
                 <li>ALT + INSERT -> equals() and hashCode() Apache (inside Java Editor).</li>
             </ul>
@@ -11,6 +11,7 @@
             ]]>
     </description>
     <version>1.0.1</version>
+
     <change-notes>
         <![CDATA[
            version 1.0
@@ -26,7 +27,7 @@
          ]]>
     </change-notes>
 
-    <vendor url="http://ivonet.nl" email="http://www.ivonet.nl/home/contact">IvoNet.nl</vendor>
+    <vendor url="http://www.ivonet.nl/home/contact">IvoNet.nl</vendor>
 
     <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Build+Number+Ranges for description -->
     <idea-version since-build="107.105"/>
