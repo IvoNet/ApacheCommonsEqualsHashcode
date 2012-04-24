@@ -35,8 +35,8 @@ class GenerateEqualsHashApacheCommonsHandler extends GenerateMembersHandlerBase 
     static final PsiElementClassMember[] DUMMY_RESULT = new PsiElementClassMember[1]
     static final String ONLY_STATIC_FIELDS_ERROR = 'No fields to include in equals/hashCode have been found' //cannot return empty array, but this result won't be used anyway
 
-    HashCodeGenerator guavaHashCodeGenerator
-    EqualsGenerator guavaEqualsGenerator
+    HashCodeGenerator ivoNetHashCodeGenerator
+    EqualsGenerator ivoNetEqualsGenerator
     MethodChooser methodChooser
     GenerateEqualsHashCodeApacheCommonsWizardFactory factory
 
@@ -44,11 +44,11 @@ class GenerateEqualsHashApacheCommonsHandler extends GenerateMembersHandlerBase 
     PsiField[] hashCodeFields = null
 
 
-    GenerateEqualsHashApacheCommonsHandler(HashCodeGenerator guavaHashCodeGenerator, EqualsGenerator guavaEqualsGenerator,
+    GenerateEqualsHashApacheCommonsHandler(HashCodeGenerator ivoNetHashCodeGenerator, EqualsGenerator ivoNetEqualsGenerator,
                                               MethodChooser methodChooser, GenerateEqualsHashCodeApacheCommonsWizardFactory factory) {
         super('')
-        this.guavaHashCodeGenerator = guavaHashCodeGenerator
-        this.guavaEqualsGenerator = guavaEqualsGenerator
+        this.ivoNetHashCodeGenerator = ivoNetHashCodeGenerator
+        this.ivoNetEqualsGenerator = ivoNetEqualsGenerator
         this.methodChooser = methodChooser
         this.factory = factory
     }
@@ -58,8 +58,8 @@ class GenerateEqualsHashApacheCommonsHandler extends GenerateMembersHandlerBase 
 
         String equalsMethodName = methodChooser.chooseEqualsMethodName(psiClass)
         String hashCodeMethodName = methodChooser.chooseHashCodeMethodName(psiClass)
-        def hashCodeMethod = guavaHashCodeGenerator.hashCodeMethod(hashCodeFields as List, hashCodeMethodName)
-        def equalsMethod = guavaEqualsGenerator.equalsMethod(equalsFields as List, psiClass, equalsMethodName)
+        def hashCodeMethod = ivoNetHashCodeGenerator.hashCodeMethod(hashCodeFields as List, psiClass, hashCodeMethodName)
+        def equalsMethod = ivoNetEqualsGenerator.equalsMethod(equalsFields as List, psiClass, equalsMethodName)
 
         OverrideImplementUtil.convert2GenerationInfos([hashCodeMethod, equalsMethod])
     }

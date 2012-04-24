@@ -175,7 +175,7 @@ class GenerateEqualsHashApacheCommonsHandlerTest extends Specification {
         methodChooser.chooseHashCodeMethodName(psiClass) >> hashCodeMethodName
 
         guavaEqualsGenerator.equalsMethod(null, psiClass, equalsMethodName) >> equalsMethod
-        guavaHashCodeGenerator.hashCodeMethod(null, hashCodeMethodName) >> hashCodeMethod
+        guavaHashCodeGenerator.hashCodeMethod(null, psiClass, hashCodeMethodName) >> hashCodeMethod
 
         def list = Mock(List)
         OverrideImplementUtil.metaClass.'static'.convert2GenerationInfos = { Collection collection ->

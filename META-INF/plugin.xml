@@ -10,20 +10,27 @@
             Don't forget to put the commons-lang jar on your classpath.
             ]]>
     </description>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 
     <change-notes>
         <![CDATA[
-           version 1.0
+           version 1.0.2
            <br/>
            <ul>
-           <li>Tested against IDEA 11.1</li>
+           <li>the .appendSuper(...) builder methods will now only be added when the super of the class is not Object.</li>
+           <li>a bit of code cleanup and unit test fixes</li>
            </ul>
            version 1.0.1
            <br/>
            <ul>
            <li>Added url to the plugin</li>
            </ul>
+           <li>Tested against IDEA 11.1</li>
+           </ul>
+           version 1.0
+           <br/>
+           <ul>
+           <li>Tested against IDEA 11.1</li>
          ]]>
     </change-notes>
 

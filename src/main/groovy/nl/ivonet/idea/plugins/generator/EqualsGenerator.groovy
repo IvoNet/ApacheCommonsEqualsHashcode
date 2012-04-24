@@ -18,7 +18,13 @@ class EqualsGenerator {
             methodText << ' if (obj == null) {return false;}'
             methodText << ' if (getClass() != obj.getClass()) {return false;}'
             methodText << " final ${psiClass.name} other = (${psiClass.name}) obj;"
-            methodText << ' return new org.apache.commons.lang.builder.EqualsBuilder().appendSuper(super.equals(obj))'
+            methodText << ' return new org.apache.commons.lang.builder.EqualsBuilder()'
+            println "psiClass.superclass      = $psiClass.superClass"
+            println "psiClass.superclazz.name = $psiClass.superClass.name"
+
+            if (psiClass != null && !psiClass.superClass.name.equals("Object")) {
+                methodText << '.appendSuper(super.equals(obj))'
+            }
             equalsPsiFields.eachWithIndex { field, index ->
                 methodText << ".append(this.${field.name}, other.${field.name})"
 //                if (index < equalsPsiFields.size() - 1) {
