@@ -7,7 +7,8 @@ See [here](http://www.ivonet.nl/home/blog/t/1001) for mor information.
 
 This little plugin is loosly based of the equals and hasCode generator [deluxe](https://github.com/mjedynak/EqualsHashCodeDeluxeGenerator)
 
-It has been tested on IntelliJ 11
+It has been tested on IntelliJ 11 and 12
+On Windows and Mac Operating Systems
 
 # Example #
 
