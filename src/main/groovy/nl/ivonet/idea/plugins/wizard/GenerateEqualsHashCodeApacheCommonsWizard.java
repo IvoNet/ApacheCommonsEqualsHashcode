@@ -1,30 +1,16 @@
 package nl.ivonet.idea.plugins.wizard;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
-import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-
-import org.jetbrains.annotations.NotNull;
-
 import com.intellij.codeInsight.CodeInsightBundle;
 import com.intellij.codeInsight.generation.GenerateEqualsHelper;
 import com.intellij.ide.wizard.AbstractWizard;
 import com.intellij.ide.wizard.StepAdapter;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.SystemInfo;
 import com.intellij.psi.PsiArrayType;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiMember;
 import com.intellij.psi.PsiModifier;
-import com.intellij.psi.PsiPrimitiveType;
 import com.intellij.psi.PsiType;
 import com.intellij.refactoring.classMembers.MemberInfoBase;
 import com.intellij.refactoring.classMembers.MemberInfoChange;
@@ -33,6 +19,16 @@ import com.intellij.refactoring.classMembers.MemberInfoTooltipManager;
 import com.intellij.refactoring.ui.MemberSelectionPanel;
 import com.intellij.refactoring.util.classMembers.MemberInfo;
 import com.intellij.util.containers.HashMap;
+import org.jetbrains.annotations.NotNull;
+
+import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class GenerateEqualsHashCodeApacheCommonsWizard extends AbstractWizard {
     private final PsiClass myClass;
@@ -48,8 +44,7 @@ public class GenerateEqualsHashCodeApacheCommonsWizard extends AbstractWizard {
     private static final MyMemberInfoFilter MEMBER_INFO_FILTER = new MyMemberInfoFilter();
 
     public GenerateEqualsHashCodeApacheCommonsWizard(final Project project, final PsiClass aClass,
-                                                     final boolean needEquals, final boolean needHashCode)
-    {
+                                                     final boolean needEquals, final boolean needHashCode) {
         super(CodeInsightBundle.message("generate.equals.hashcode.wizard.title"), project);
         myClass = aClass;
 
@@ -191,51 +186,25 @@ public class GenerateEqualsHashCodeApacheCommonsWizard extends AbstractWizard {
     }
 
     private void updateStatus() {
-        boolean finishEnabled = true;
-        boolean nextEnabled = true;
-        if (myEqualsPanel != null & getCurrentStep() < myEqualsStepCode) {
-            finishEnabled = false;
-        }
-
-        if (getCurrentStep() == myTestBoxedStep - 1) {
-            boolean anyNonBoxed = false;
-            for (final MemberInfo classField : myClassFields) {
-                if (classField.isChecked()) {
-                    final PsiField field = (PsiField) classField.getMember();
-                    if (!(field.getType() instanceof PsiPrimitiveType)) {
-                        anyNonBoxed = true;
-                        break;
-                    }
-                }
-            }
-            nextEnabled = anyNonBoxed;
-        }
-
         if (getCurrentStep() == myEqualsStepCode) {
-            boolean anyChecked = false;
-            for (final MemberInfo classField : myClassFields) {
-                if (classField.isChecked()) {
-                    anyChecked = true;
-                    break;
-                }
-            }
-            finishEnabled &= anyChecked;
-            nextEnabled &= anyChecked;
+            getNextButton().setEnabled(anyChecked(myClassFields));
+        } else {
+            getNextButton().setEnabled(anyChecked(myHashCodePanel.getTable().getSelectedMemberInfos()));
         }
-
-        if (getCurrentStep() == myTestBoxedStep || getCurrentStep() == 1) {
-            finishEnabled = true;
-            nextEnabled = SystemInfo.isMac;
-        }
-
-        getFinishButton().setEnabled(finishEnabled);
-        getNextButton().setEnabled(nextEnabled);
-
-        if (finishEnabled && getFinishButton().isVisible()) {
-            getRootPane().setDefaultButton(getFinishButton());
-        } else if (getNextButton().isEnabled()) {
+        if (getNextButton().isEnabled()) {
             getRootPane().setDefaultButton(getNextButton());
         }
+    }
+
+    private boolean anyChecked(final Collection<MemberInfo> memberInfos) {
+        boolean anyChecked = false;
+        for (final MemberInfo classField : memberInfos) {
+            if (classField.isChecked()) {
+                anyChecked = true;
+                break;
+            }
+        }
+        return anyChecked;
     }
 
     public JComponent getPreferredFocusedComponent() {
@@ -277,7 +246,8 @@ public class GenerateEqualsHashCodeApacheCommonsWizard extends AbstractWizard {
     }
 
     private static class EqualsMemberInfoModel implements MemberInfoModel<PsiMember, MemberInfo> {
-        MemberInfoTooltipManager<PsiMember, MemberInfo> myTooltipManager = new MemberInfoTooltipManager<PsiMember, MemberInfo>(
+        MemberInfoTooltipManager<PsiMember, MemberInfo> myTooltipManager = new MemberInfoTooltipManager<PsiMember,
+                MemberInfo>(
                 new MemberInfoTooltipManager.TooltipProvider<PsiMember, MemberInfo>() {
                     public String getTooltip(final MemberInfo memberInfo) {
                         if (checkForProblems(memberInfo) == OK) {
@@ -346,7 +316,8 @@ public class GenerateEqualsHashCodeApacheCommonsWizard extends AbstractWizard {
     }
 
     private static class HashCodeMemberInfoModel implements MemberInfoModel<PsiMember, MemberInfo> {
-        private final MemberInfoTooltipManager<PsiMember, MemberInfo> myTooltipManager = new MemberInfoTooltipManager<PsiMember, MemberInfo>(
+        private final MemberInfoTooltipManager<PsiMember, MemberInfo> myTooltipManager = new
+                MemberInfoTooltipManager<PsiMember, MemberInfo>(
                 new MemberInfoTooltipManager.TooltipProvider<PsiMember, MemberInfo>() {
                     public String getTooltip(final MemberInfo memberInfo) {
                         if (isMemberEnabled(memberInfo)) {

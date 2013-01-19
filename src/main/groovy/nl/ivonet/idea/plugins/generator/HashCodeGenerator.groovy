@@ -1,12 +1,8 @@
 package nl.ivonet.idea.plugins.generator
 
 import com.intellij.pom.java.LanguageLevel
-import com.intellij.psi.JavaPsiFacade
-import com.intellij.psi.PsiElementFactory
-import com.intellij.psi.PsiField
-import com.intellij.psi.PsiMethod
+import com.intellij.psi.*
 import org.jetbrains.annotations.NotNull
-import com.intellij.psi.PsiClass
 
 class HashCodeGenerator {
 
@@ -20,9 +16,9 @@ class HashCodeGenerator {
                 methodText << '.appendSuper(super.hashCode())'
             }
             hashCodePsiFields.eachWithIndex { field, index ->
-                methodText << ".append(this.${field.name})"
-//                if (index < hashCodePsiFields.size() - 1) {
-//                }
+                if (field != null) {
+                    methodText << ".append(this.${field.name})"
+                }
             }
             methodText << '.toHashCode();}'
             factory.createMethodFromText(methodText.toString(), null, LanguageLevel.JDK_1_6)
