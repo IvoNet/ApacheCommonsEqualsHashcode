@@ -1,12 +1,7 @@
 package nl.ivonet.idea.plugins.action
 
 import com.intellij.codeInsight.CodeInsightBundle
-import com.intellij.codeInsight.generation.ClassMember
-import com.intellij.codeInsight.generation.GenerateEqualsHelper
-import com.intellij.codeInsight.generation.GenerateMembersHandlerBase
-import com.intellij.codeInsight.generation.GenerationInfo
-import com.intellij.codeInsight.generation.OverrideImplementUtil
-import com.intellij.codeInsight.generation.PsiElementClassMember
+import com.intellij.codeInsight.generation.*
 import com.intellij.codeInsight.hint.HintManager
 import com.intellij.openapi.application.Application
 import com.intellij.openapi.application.ApplicationManager
@@ -14,11 +9,7 @@ import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogWrapper
 import com.intellij.openapi.ui.Messages
-import com.intellij.psi.PsiAnonymousClass
-import com.intellij.psi.PsiClass
-import com.intellij.psi.PsiField
-import com.intellij.psi.PsiMethod
-import com.intellij.psi.PsiModifier
+import com.intellij.psi.*
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.util.IncorrectOperationException
 import nl.ivonet.idea.plugins.factory.GenerateEqualsHashCodeApacheCommonsWizardFactory
@@ -29,7 +20,7 @@ import nl.ivonet.idea.plugins.wizard.GenerateEqualsHashCodeApacheCommonsWizard
 class GenerateEqualsHashApacheCommonsHandler extends GenerateMembersHandlerBase {
 
     static final String METHODS_DEFINED_FOR_ANONYMOUS_CLASS = 'Methods "boolean equals(Object)" or "int hashCode()" are already defined \nfor this anonymous class. Do you want to delete them and proceed?'
-    static final String METHODS_DEFINED_FOR_CLASS = 'Methods "boolean equals(Object)" or "int hashCode()" are already defined\nfor class {0}. Do you want to delete them and proceed?'
+    static final String METHODS_DEFINED_FOR_CLASS = 'Methods "boolean equals(Object)" or "int hashCode()" are already defined\nfor class this class. Do you want to delete them and proceed?'
     static final String TITLE = 'generate.equals.and.hashcode.already.defined.title'
 
     static final PsiElementClassMember[] DUMMY_RESULT = new PsiElementClassMember[1]
@@ -45,7 +36,7 @@ class GenerateEqualsHashApacheCommonsHandler extends GenerateMembersHandlerBase 
 
 
     GenerateEqualsHashApacheCommonsHandler(HashCodeGenerator ivoNetHashCodeGenerator, EqualsGenerator ivoNetEqualsGenerator,
-                                              MethodChooser methodChooser, GenerateEqualsHashCodeApacheCommonsWizardFactory factory) {
+                                           MethodChooser methodChooser, GenerateEqualsHashCodeApacheCommonsWizardFactory factory) {
         super('')
         this.ivoNetHashCodeGenerator = ivoNetHashCodeGenerator
         this.ivoNetEqualsGenerator = ivoNetEqualsGenerator
@@ -107,7 +98,7 @@ class GenerateEqualsHashApacheCommonsHandler extends GenerateMembersHandlerBase 
 
     private boolean hasOnlyStaticFields(PsiClass aClass) {
         boolean hasOnlyStaticFields = true
-        for (PsiField field: aClass.fields) {
+        for (PsiField field : aClass.fields) {
             if (!field.hasModifierProperty(PsiModifier.STATIC)) {
                 hasOnlyStaticFields = false
                 break
