@@ -30,3 +30,7 @@ On Windows and Mac Operating Systems
         return new EqualsBuilder().appendSuper(super.equals(obj)).append(this.foo, other.foo)
                                   .append(this.bar, other.bar).isEquals();
     }
+
+# Note:
+
+This project was cool for intellij but is now deprecated because its more or less a standard feature in this fantastic IDE.
