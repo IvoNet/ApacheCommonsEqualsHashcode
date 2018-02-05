@@ -3,8 +3,6 @@
 An IntelliJ Plugin for generating equals and hashCode methods based on the commons-lang
 EqualsBuilder and HashCodeBuilder Builders.
 
-See [here](http://www.ivonet.nl/home/blog/t/1001) for mor information.
-
 This little plugin is loosly based of the equals and hasCode generator [deluxe](https://github.com/mjedynak/EqualsHashCodeDeluxeGenerator)
 
 It has been tested on IntelliJ 11 and 12
