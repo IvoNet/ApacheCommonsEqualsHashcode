@@ -19,7 +19,7 @@ class DeleteExistingMethodsComputable implements Computable<Boolean> {
             hashCodeMethod?.delete()
             true
         }
-        catch (IncorrectOperationException e) {
+        catch (IncorrectOperationException ignored) {
             false
         }
     }

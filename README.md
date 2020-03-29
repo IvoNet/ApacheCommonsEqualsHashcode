@@ -1,5 +1,7 @@
 # Introduction #
 
+NOTE!!!! DEPRECATED !!! Time has surpassed the need for this plugin...
+
 An IntelliJ Plugin for generating equals and hashCode methods based on the commons-lang
 EqualsBuilder and HashCodeBuilder Builders.
 
